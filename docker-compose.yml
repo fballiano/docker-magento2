@@ -1,0 +1,45 @@
+#varnish:
+#  image: fballiano/docker-varnish:wily
+#  ports:
+#    - "80:80"
+#  links:
+#    - apache
+
+varnish:
+  image: fballiano/docker-varnish:wily
+  ports:
+    - "80:80"
+  links:
+    - apache
+  volumes:
+    - ./varnish.vcl:/etc/varnish/default.vcl
+
+apache:
+  image: fballiano/docker-php
+  ports:
+    - "8080:80"
+  links:
+    - db
+    - redis
+  volumes:
+    - ./magento2:/var/www/html
+
+db:
+  image: mariadb:10.0
+  ports:
+    - "3306:3306"
+  volumes_from:
+    - dbdata
+  environment:
+    - MYSQL_ROOT_PASSWORD=magento2
+    - MYSQL_DATABASE=magento2
+    - MYSQL_USER=magento2
+    - MYSQL_PASSWORD=magento2
+
+dbdata:
+  image: tianon/true
+  volumes:
+    - /var/lib/mysql
+
+redis:
+  image: redis
