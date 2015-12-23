@@ -1,18 +1,13 @@
-#varnish:
-#  image: fballiano/docker-varnish:wily
-#  ports:
-#    - "80:80"
-#  links:
-#    - apache
-
 varnish:
-  image: fballiano/docker-varnish:wily
+  image: fballiano/docker-varnish
   ports:
     - "80:80"
   links:
     - apache
   volumes:
     - ./varnish.vcl:/etc/varnish/default.vcl
+  environment:
+    - CACHE_SIZE=512M
 
 apache:
   image: fballiano/docker-php
