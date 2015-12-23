@@ -1,5 +1,5 @@
 varnish:
-  image: fballiano/docker-varnish
+  image: fballiano/varnish
   ports:
     - "80:80"
   links:
@@ -10,9 +10,17 @@ varnish:
     - CACHE_SIZE=256M
 
 apache:
-  image: fballiano/docker-php
+  image: fballiano/magento2-apache-php
   ports:
     - "8080:80"
+  links:
+    - db
+    - redis
+  volumes:
+    - ./magento2:/var/www/html
+
+cron:
+  image: fballiano/magento2-cron
   links:
     - db
     - redis
