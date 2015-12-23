@@ -7,7 +7,7 @@ varnish:
   volumes:
     - ./varnish.vcl:/etc/varnish/default.vcl
   environment:
-    - CACHE_SIZE=512M
+    - CACHE_SIZE=256M
 
 apache:
   image: fballiano/docker-php
