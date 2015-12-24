@@ -96,5 +96,6 @@ and delete all Magento's cache with
 ```
 rm -rf magento2/var/cache/*
 ```
+from now on the var/cache directory should stay empty cause all the caches should be stored in Redis.
 
 ## Enable Varnish
