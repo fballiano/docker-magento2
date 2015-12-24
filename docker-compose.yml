@@ -18,6 +18,7 @@ apache:
     - redis
   volumes:
     - ./magento2:/var/www/html
+    - ~/.composer/auth.json:/root/.composer/auth.json
 
 cron:
   image: fballiano/magento2-cron
