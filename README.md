@@ -103,3 +103,4 @@ Varnish Full Page Cache should already be enabled out of the box (we startup Var
 * select Varnish in the "caching application" combobox
 * type "apache" in both "access list" and "backend host" fields
 * type 80 in the "backend port" field
+* save
