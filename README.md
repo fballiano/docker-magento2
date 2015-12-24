@@ -17,24 +17,20 @@ Plus, with this separation, in the context of a docker swarm, you may be able in
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition magento2
 ```
 
+## Do you want sample data?
+Execute (from the host machine):
+```
+cd magento2
+php bin/magento sampledata:deploy
+composer update
+```
+You can lunch the same commmands from within the container, it's actually the same thing
+
 ## Starting all docker containers
 ```
 docker-compose up -d
 ```
 The fist time you run this command it's gonna take some time to download all the required images from docker hub.
-
-## Do you want sample data?
-First we need to enter the apache+php container:
-```
-docker exec -it dockermagento2_apache_1 bash
-```
-
-Then execute (from within the container):
-```
-php bin/magento sampledata:deploy
-composer update
-```
-If you see an error during the "composer update" then lauch it another time ;)
 
 ## Install Magento2
 
