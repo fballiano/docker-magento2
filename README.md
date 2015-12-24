@@ -34,6 +34,7 @@ Then execute (from within the container):
 php bin/magento sampledata:deploy
 composer update
 ```
+If you see an error during the "composer update" then lauch it another time ;)
 
 ## Install Magento2
 
