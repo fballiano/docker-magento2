@@ -32,6 +32,7 @@ docker exec -it dockermagento2_apache_1 bash
 Then execute (from within the container):
 ```
 php bin/magento sampledata:deploy
+composer update
 ```
 
 ## Install Magento2
