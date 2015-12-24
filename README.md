@@ -38,4 +38,15 @@ If you see an error during the "composer update" then lauch it another time ;)
 
 ## Install Magento2
 
-still writing
+open your browser to the address:
+```
+http://magento2.docker/
+```
+and use the wizard to install Magento2.
+
+## Deploy static files
+```
+docker exec -it dockermagento2_apache_1 bash
+php magento dev:source-theme:deploy
+php magento setup:static-content:deploy
+```
