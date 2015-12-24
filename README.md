@@ -43,8 +43,8 @@ and use the wizard to install Magento2.
 ## Deploy static files
 ```
 docker exec -it dockermagento2_apache_1 bash
-php magento dev:source-theme:deploy
-php magento setup:static-content:deploy
+php bin/magento dev:source-theme:deploy
+php bin/magento setup:static-content:deploy
 ```
 
 ## Enable Redis for Magento's cache
