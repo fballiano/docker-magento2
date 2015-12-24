@@ -70,7 +70,7 @@ open magento2/app/etc/env.php and add these lines:
         'compression_lib' => 'gzip', // Supports gzip, lzf and snappy,
         'use_lua' => '0' // Lua scripts should be used for some operations
       )
-    ) ,
+    ),
     'page_cache' => array(
       'backend' => 'Cm_Cache_Backend_Redis',
       'backend_options' => array(
@@ -86,7 +86,7 @@ open magento2/app/etc/env.php and add these lines:
       )
     )
   )
-) ,
+),
 ```
 and delete all Magento's cache with
 ```
