@@ -100,3 +100,13 @@ Varnish Full Page Cache should already be enabled out of the box (we startup Var
 * type "apache" in both "access list" and "backend host" fields
 * type 80 in the "backend port" field
 * save
+
+# Cross platform and performance
+
+At the moment the apache/php container has been created in order to work with the default Docker Machine, to be able to run on both windows and mac (check the usermod 1000 in the Dockerfile).
+
+Performarce are not ok on a good hardware but everybody knows about vbox shared folders slowness...
+
+On mac is surely better to use Dinghy as a replacement for the default Docker Machine but the problem is that I would have need to generate the apache/php image with "usermod 501" making it not compatible with the default Docker Machine and thus windows devs.
+
+What's the better choice? Please share your ideas with me.
