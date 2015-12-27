@@ -110,3 +110,8 @@ Performarce are not ok on a good hardware but everybody knows about vbox shared 
 On mac is surely better to use Dinghy as a replacement for the default Docker Machine but the problem is that I would have need to generate the apache/php image with "usermod 501" making it not compatible with the default Docker Machine and thus windows devs.
 
 What's the better choice? Please share your ideas with me.
+
+# TODO
+* Support for scaling the apache container(s) via "docker-compose scale apache=X", with Vanirsh backends auto discovery
+* Add a SSL terminator image
+* DB clustering?
