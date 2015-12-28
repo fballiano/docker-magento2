@@ -1,4 +1,4 @@
-# Magento2 (Varnish + PHP7 + Redis) docker-compose infrastructure
+# Magento2 (Varnish + PHP7 + Redis) cluster ready docker-compose infrastructure
 
 ## Infrastructure overview
 * Container 1: MariaDB
@@ -111,7 +111,17 @@ On mac is surely better to use Dinghy as a replacement for the default Docker Ma
 
 What's the better choice? Please share your ideas with me.
 
+# Scaling apache containers
+If you need more horsepower you can
+```
+docker-compose scale apache=X
+```
+where X is the number of apache containers you want to start.
+
+The cron container will check how many apache containers we have and update Varnish's VCL.
+Unfortunately at the moment there's no service autodiscovery, you've to start your infrastructure already with multiple apache containers if you need them. I hope to be able to add real autodiscovery soon.
+
 # TODO
-* Support for scaling the apache container(s) via "docker-compose scale apache=X", with Vanirsh backends auto discovery
+* Support for autodiscovery new/dead apache containers
 * Add a SSL terminator image
 * DB clustering?
