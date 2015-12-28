@@ -24,8 +24,6 @@ varnish:
 
 apache:
   image: fballiano/magento2-apache-php
-#  ports:
-#    - "8080:80"
   links:
     - db
     - redis
