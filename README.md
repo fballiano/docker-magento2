@@ -119,10 +119,8 @@ docker-compose scale apache=X
 ```
 where X is the number of apache containers you want to start.
 
-The cron container will check how many apache containers we have and update Varnish's VCL.
-Unfortunately at the moment there's no service autodiscovery, you've to start your infrastructure already with multiple apache containers if you need them. I hope to be able to add real autodiscovery soon.
+The cron container will check how many apache containers we have (broadcast/discovery service is stored on the redis_clusterdata container) and will update Varnish's VCL.
 
 # TODO
-* Support for autodiscovery new/dead apache containers
 * Add a SSL terminator image
 * DB clustering?
