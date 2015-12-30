@@ -2,10 +2,11 @@
 
 ## Infrastructure overview
 * Container 1: MariaDB
-* Container 2: Redis (we'll use it for Magento's cache)
+* Container 2: Redis (for Magento's cache)
 * Container 3: Apache 2.4 + PHP 7 (modphp)
 * Container 4: Cron
 * Container 5: Varnish 4
+* Container 6: Redis (for autodiscovery cluster nodes)
 
 ###Why a separate cron container?
 First of all containers should be (as far as possible) single process, but the most important thing is that (if someday we'll be able to deploy this infrastructure in production) we may need a cluster of apache+php containers but a single cron container running.
@@ -116,12 +117,12 @@ If you need more horsepower you can
 ```
 docker-compose scale apache=X
 ```
-where X is the number of apache containers you want to start.
+where X is the number of apache containers you want.
 
-The cron container will check how many apache containers we have and update Varnish's VCL.
-Unfortunately at the moment there's no service autodiscovery, you've to start your infrastructure already with multiple apache containers if you need them. I hope to be able to add real autodiscovery soon.
+The cron container will check how many apache containers we have (broadcast/discovery service is stored on the redis_clusterdata container) and will update Varnish's VCL.
+
+You can start your system with just one apache container, then scale it afterward, autodiscovery will reconfigure the load balancing on the fly.
 
 # TODO
-* Support for autodiscovery new/dead apache containers
 * Add a SSL terminator image
 * DB clustering?
