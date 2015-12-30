@@ -117,9 +117,11 @@ If you need more horsepower you can
 ```
 docker-compose scale apache=X
 ```
-where X is the number of apache containers you want to start.
+where X is the number of apache containers you want.
 
 The cron container will check how many apache containers we have (broadcast/discovery service is stored on the redis_clusterdata container) and will update Varnish's VCL.
+
+You can start your system with just one apache container, then scale it afterward, autodiscovery will reconfigure the load balancing on the fly.
 
 # TODO
 * Add a SSL terminator image
