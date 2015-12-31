@@ -123,6 +123,8 @@ The cron container will check how many apache containers we have (broadcast/disc
 
 You can start your system with just one apache container, then scale it afterward, autodiscovery will reconfigure the load balancing on the fly.
 
+Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/pub/media/styles.css" every 5 seconds, if 1 fails (container has been shut down) the container is considered sick.
+
 # TODO
 * Add a SSL terminator image
 * DB clustering?
