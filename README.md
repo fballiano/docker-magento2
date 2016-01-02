@@ -102,7 +102,7 @@ Varnish Full Page Cache should already be enabled out of the box (we startup Var
 * type 80 in the "backend port" field
 * save
 
-# Cross platform and performance
+## Cross platform and performance
 
 At the moment the apache/php container has been created in order to work with the default Docker Machine, to be able to run on both windows and mac (check the usermod 1000 in the Dockerfile).
 
@@ -112,7 +112,7 @@ On mac is surely better to use Dinghy as a replacement for the default Docker Ma
 
 What's the better choice? Please share your ideas with me.
 
-# Scaling apache containers
+## Scaling apache containers
 If you need more horsepower you can
 ```
 docker-compose scale apache=X
@@ -125,6 +125,10 @@ You can start your system with just one apache container, then scale it afterwar
 
 Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/pub/media/styles.css" every 5 seconds, if 1 fails (container has been shut down) the container is considered sick.
 
-# TODO
+## Tested on:
+* Mac OS X (docker 1.9), default docker machine (dinghy needs changes to the apache's dockerfile)
+* Ubuntu Wily (docker 1.9)
+
+## TODO
 * Add a SSL terminator image
 * DB clustering?
