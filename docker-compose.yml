@@ -2,8 +2,8 @@ cron:
   image: fballiano/magento2-cron
   links:
     - db
-    - redis_cache
-    - redis_clusterdata
+    - cache
+    - clusterdata
     - apache
     - varnish
   volumes:
@@ -27,8 +27,8 @@ apache:
   image: fballiano/magento2-apache-php
   links:
     - db
-    - redis_cache
-    - redis_clusterdata
+    - cache
+    - clusterdata
   volumes:
     - ./magento2:/var/www/html
     - ~/.composer/auth.json:/root/.composer/auth.json
@@ -50,8 +50,8 @@ dbdata:
   volumes:
     - /var/lib/mysql
 
-redis_cache:
+cache:
   image: fballiano/redis-volatile
 
-redis_clusterdata:
+clusterdata:
   image: fballiano/redis-volatile
