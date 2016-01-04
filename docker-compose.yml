@@ -10,6 +10,13 @@ cron:
     - ./magento2:/var/www/html
     - ./varnish.secret:/varnish.secret
 
+ssl:
+  image: fballiano/nginx-ssl-for-magento2
+  links:
+    - varnish
+  ports:
+    - "443:443"
+
 varnish:
   image: fballiano/varnish
   ports:
