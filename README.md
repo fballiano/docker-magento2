@@ -7,6 +7,7 @@
 * Container 4: Cron
 * Container 5: Varnish 4
 * Container 6: Redis (for autodiscovery cluster nodes)
+* Container 7: Nginx SSL terminator
 
 ###Why a separate cron container?
 First of all containers should be (as far as possible) single process, but the most important thing is that (if someday we'll be able to deploy this infrastructure in production) we may need a cluster of apache+php containers but a single cron container running.
@@ -102,6 +103,19 @@ Varnish Full Page Cache should already be enabled out of the box (we startup Var
 * type 80 in the "backend port" field
 * save
 
+## Enable SSL Support
+Add this line to magento2/.htaccess
+```
+SetEnvIf X-Forwarded-Proto https HTTPS=on
+```
+Then you can configure Magento as you wish to support secure urls.
+
+If you need to generate new self signed certificates use this command
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+```
+then you can mount them into the nginx-ssl container using the "volumes" instruction in the docker-compose.xml file. Same thing goes if you need to use custom nginx configurations (you can mount them into /etc/nginx/conf.d). Check the source code of https://github.com/fballiano/docker-nginx-ssl-for-magento2 to better understand where are the configuration stored inside the image/container.
+
 ## Cross platform and performance
 
 At the moment the apache/php container has been created in order to work with the default Docker Machine, to be able to run on both windows and mac (check the usermod 1000 in the Dockerfile).
@@ -130,5 +144,4 @@ Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/pub/m
 * Ubuntu Wily (docker 1.9)
 
 ## TODO
-* Add a SSL terminator image
 * DB clustering?
