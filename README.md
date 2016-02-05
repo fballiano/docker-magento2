@@ -144,4 +144,6 @@ Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/pub/m
 * Ubuntu Wily (docker 1.9)
 
 ## TODO
+* not compatible with magento 2.0.2 cause /pub/get.php now goes 404 making varnish's backends sick...
+* sessions on redis
 * DB clustering?
