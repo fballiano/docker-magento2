@@ -140,8 +140,8 @@ You can start your system with just one apache container, then scale it afterwar
 Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/pub/media/styles.css" every 5 seconds, if 1 fails (container has been shut down) the container is considered sick.
 
 ## Tested on:
-* Mac OS X (docker 1.9), default docker machine (dinghy needs changes to the apache's dockerfile)
-* Ubuntu Wily (docker 1.9)
+* Mac OS X (docker 1.10), default docker machine (dinghy needs changes to the apache's dockerfile)
+* Ubuntu Wily (docker 1.10)
 
 ## TODO
 * sessions on redis?
