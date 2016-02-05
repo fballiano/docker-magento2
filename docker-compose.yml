@@ -1,64 +1,77 @@
-cron:
-  image: fballiano/magento2-cron
-  links:
-    - db
-    - cache
-    - clusterdata
-    - apache
-    - varnish
-  volumes:
-    - ./magento2:/var/www/html
-    - ./varnish.secret:/varnish.secret
+version: '2'
+services:
+  cron:
+    image: fballiano/magento2-cron
+    depends_on:
+      - apache
+      - varnish
+    links:
+      - db
+      - cache
+      - clusterdata
+      - apache
+      - varnish
+    volumes:
+      - ./magento2:/var/www/html
+      - ./varnish.secret:/varnish.secret
 
-ssl:
-  image: fballiano/nginx-ssl-for-magento2
-  links:
-    - varnish
-  ports:
-    - "443:443"
+  ssl:
+    image: fballiano/nginx-ssl-for-magento2
+    depends_on:
+      - varnish
+    links:
+      - varnish
+    ports:
+      - "443:443"
 
-varnish:
-  image: fballiano/varnish
-  ports:
-    - "80:80"
-    - "6082:6082"
-  links:
-    - apache
-  volumes:
-    - ./varnish.vcl:/etc/varnish/default.vcl
-    - ./varnish.secret:/etc/varnish/secret
-  environment:
-    - CACHE_SIZE=256M
+  varnish:
+    image: fballiano/varnish
+    ports:
+      - "80:80"
+      - "6082:6082"
+    depends_on:
+      - apache
+    links:
+      - apache
+    volumes:
+      - ./varnish.vcl:/etc/varnish/default.vcl
+      - ./varnish.secret:/etc/varnish/secret
+    environment:
+      - CACHE_SIZE=256M
 
-apache:
-  image: fballiano/magento2-apache-php
-  links:
-    - db
-    - cache
-    - clusterdata
-  volumes:
-    - ./magento2:/var/www/html
-    - ~/.composer/auth.json:/root/.composer/auth.json
+  apache:
+    image: fballiano/magento2-apache-php
+    depends_on:
+      - db
+      - cache
+      - clusterdata
+    links:
+      - db
+      - cache
+      - clusterdata
+    volumes:
+      - ./magento2:/var/www/html
+      - ~/.composer/auth.json:/root/.composer/auth.json
 
-db:
-  image: mariadb
-  ports:
-    - "3306:3306"
-  volumes_from:
-    - dbdata
-  environment:
-    - MYSQL_ROOT_PASSWORD=magento2
-    - MYSQL_DATABASE=magento2
-    - MYSQL_USER=magento2
-    - MYSQL_PASSWORD=magento2
+  db:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    volumes_from:
+      - dbdata
+    environment:
+      - MYSQL_ROOT_PASSWORD=magento2
+      - MYSQL_DATABASE=magento2
+      - MYSQL_USER=magento2
+      - MYSQL_PASSWORD=magento2
 
-dbdata:
-  image: tianon/true
-  volumes:
-    - /var/lib/mysql
+  dbdata:
+    image: tianon/true
+    volumes:
+      - /var/lib/mysql
 
-cache:
-  image: fballiano/redis-volatile
+  cache:
+    image: fballiano/redis-volatile
 
-clusterdata:
-  image: fballiano/redis-volatile
+  clusterdata:
+    image: fballiano/redis-volatile
