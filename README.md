@@ -5,7 +5,7 @@
 * Container 2: Redis (for Magento's cache)
 * Container 3: Apache 2.4 + PHP 7 (modphp)
 * Container 4: Cron
-* Container 5: Varnish 4
+* Container 5: Varnish 4.1
 * Container 6: Redis (for autodiscovery cluster nodes)
 * Container 7: Nginx SSL terminator
 
@@ -120,16 +120,6 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx
 ```
 then you can mount them into the nginx-ssl container using the "volumes" instruction in the docker-compose.xml file. Same thing goes if you need to use custom nginx configurations (you can mount them into /etc/nginx/conf.d). Check the source code of https://github.com/fballiano/docker-nginx-ssl-for-magento2 to better understand where are the configuration stored inside the image/container.
 
-## Cross platform and performance
-
-At the moment the apache/php container has been created in order to work with the default Docker Machine, to be able to run on both windows and mac (check the usermod 1000 in the Dockerfile).
-
-Performarce are not ok on a good hardware but everybody knows about vbox shared folders slowness...
-
-On mac is surely better to use Dinghy as a replacement for the default Docker Machine but the problem is that I would have need to generate the apache/php image with "usermod 501" making it not compatible with the default Docker Machine and thus windows devs.
-
-What's the better choice? Please share your ideas with me.
-
 ## Scaling apache containers
 If you need more horsepower you can
 ```
@@ -144,8 +134,7 @@ You can start your system with just one apache container, then scale it afterwar
 Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/pub/media/styles.css" every 5 seconds, if 1 fails (container has been shut down) the container is considered sick.
 
 ## Tested on:
-* Mac OS X (docker 1.10), default docker machine (dinghy needs changes to the apache's dockerfile)
-* Ubuntu Wily (docker 1.10)
+* Docker for Mac 17
 
 ## TODO
 * sessions on redis?
