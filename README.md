@@ -137,5 +137,7 @@ Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/pub/m
 * Docker for Mac 17
 
 ## TODO
+* migrate to alpine linux based containers
+* optimize everything for docker swarm
 * sessions on redis?
 * DB clustering?
