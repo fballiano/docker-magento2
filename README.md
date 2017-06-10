@@ -137,7 +137,7 @@ Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/fb_ho
 * Docker for Mac 17
 
 ## TODO
-* migrate to alpine linux based containers
+* migrate to alpine/linuxkit based containers
 * optimize everything for docker swarm
 * sessions on redis?
 * DB clustering?
