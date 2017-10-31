@@ -5,11 +5,11 @@
 * Container 2: Redis (for Magento's cache)
 * Container 3: Apache 2.4 + PHP 7 (modphp)
 * Container 4: Cron
-* Container 5: Varnish 4
+* Container 5: Varnish 4.1
 * Container 6: Redis (for autodiscovery cluster nodes)
 * Container 7: Nginx SSL terminator
 
-###Why a separate cron container?
+### Why a separate cron container?
 First of all containers should be (as far as possible) single process, but the most important thing is that (if someday we'll be able to deploy this infrastructure in production) we may need a cluster of apache+php containers but a single cron container running.
 
 Plus, with this separation, in the context of a docker swarm, you may be able in the future to separare resources allocated to the cron container from the rest of the infrastructure.
@@ -40,7 +40,11 @@ open your browser to the address:
 ```
 http://magento2.docker/
 ```
-and use the wizard to install Magento2.
+and use the wizard to install Magento2.  
+For database configuration use hostname dockermagento2_db_1 and username/password/dbname you have in your docker-compose.xml file, defaults are:
+- MYSQL_USER=magento2
+- MYSQL_PASSWORD=magento2
+- MYSQL_DATABASE=magento2
 
 ## Deploy static files
 ```
@@ -116,16 +120,6 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx
 ```
 then you can mount them into the nginx-ssl container using the "volumes" instruction in the docker-compose.xml file. Same thing goes if you need to use custom nginx configurations (you can mount them into /etc/nginx/conf.d). Check the source code of https://github.com/fballiano/docker-nginx-ssl-for-magento2 to better understand where are the configuration stored inside the image/container.
 
-## Cross platform and performance
-
-At the moment the apache/php container has been created in order to work with the default Docker Machine, to be able to run on both windows and mac (check the usermod 1000 in the Dockerfile).
-
-Performarce are not ok on a good hardware but everybody knows about vbox shared folders slowness...
-
-On mac is surely better to use Dinghy as a replacement for the default Docker Machine but the problem is that I would have need to generate the apache/php image with "usermod 501" making it not compatible with the default Docker Machine and thus windows devs.
-
-What's the better choice? Please share your ideas with me.
-
 ## Scaling apache containers
 If you need more horsepower you can
 ```
@@ -137,11 +131,13 @@ The cron container will check how many apache containers we have (broadcast/disc
 
 You can start your system with just one apache container, then scale it afterward, autodiscovery will reconfigure the load balancing on the fly.
 
-Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/pub/media/styles.css" every 5 seconds, if 1 fails (container has been shut down) the container is considered sick.
+Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/fb_host_probe.txt" every 5 seconds, if 1 fails (container has been shut down) the container is considered sick.
 
 ## Tested on:
-* Mac OS X (docker 1.9), default docker machine (dinghy needs changes to the apache's dockerfile)
-* Ubuntu Wily (docker 1.9)
+* Docker for Mac 17
 
 ## TODO
+* migrate to alpine/linuxkit based containers
+* optimize everything for docker swarm
+* sessions on redis?
 * DB clustering?
