@@ -133,3 +133,4 @@ Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/fb_ho
 * optimize everything for docker swarm
 * sessions on redis?
 * DB clustering?
+* optional RabbitMQ
