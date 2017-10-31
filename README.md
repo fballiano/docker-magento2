@@ -14,19 +14,11 @@ First of all containers should be (as far as possible) single process, but the m
 
 Plus, with this separation, in the context of a docker swarm, you may be able in the future to separare resources allocated to the cron container from the rest of the infrastructure.
 
-## Downloading Magento2
-```
-composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition magento2
-```
+## Setup Magento 2
 
-## Do you want sample data?
-Execute (from the host machine):
-```
-cd magento2
-php bin/magento sampledata:deploy
-composer update
-```
-You can lunch the same commmands from within the container, it's actually the same thing
+Download Magento 2 in any way you want (zip/tgz from website, composer, etc) and extract in the "magento2" subdirectory of this project.
+
+If you want to change the default "magento2" directory simply change its name in the "docker-compose.xml" (there are 2 references, under the "cron" section and under the "apache" section).
 
 ## Starting all docker containers
 ```
@@ -141,3 +133,4 @@ Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/fb_ho
 * optimize everything for docker swarm
 * sessions on redis?
 * DB clustering?
+* optional RabbitMQ
