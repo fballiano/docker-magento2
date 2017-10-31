@@ -125,6 +125,14 @@ You can start your system with just one apache container, then scale it afterwar
 
 Also, the cron container (which updates Varnish's VCL) sets a "probe" to "/fb_host_probe.txt" every 5 seconds, if 1 fails (container has been shut down) the container is considered sick.
 
+## Custom php.ini
+We already have a personalized php.ini inside this project: https://github.com/fballiano/docker-magento2-apache-php/blob/master/php.ini but if you want to further customize your settings:
+- edit the php.ini file in the root directoy of this project
+- edit the "docker-compose.xml" file, look for the 2 commented lines (under the "cron" section and under the "apache" section) referencing the php.ini
+- start/restart the docker stack
+
+Please note that your php.ini will be the last parsed thus you can ovverride any setting.
+
 ## Tested on:
 * Docker for Mac 17
 
