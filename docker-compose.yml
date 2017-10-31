@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   cron:
     image: fballiano/magento2-cron
@@ -57,21 +57,19 @@ services:
     image: mariadb
     ports:
       - "3306:3306"
-    volumes_from:
-      - dbdata
+    volumes:
+      - dbdata:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=magento2
       - MYSQL_DATABASE=magento2
       - MYSQL_USER=magento2
       - MYSQL_PASSWORD=magento2
 
-  dbdata:
-    image: tianon/true
-    volumes:
-      - /var/lib/mysql
-
   cache:
     image: fballiano/redis-volatile
 
   clusterdata:
     image: fballiano/redis-volatile
+
+volumes:
+  dbdata:
