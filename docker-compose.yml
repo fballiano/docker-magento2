@@ -14,6 +14,8 @@ services:
     volumes:
       - ./magento2:/var/www/html
       - ./varnish.secret:/varnish.secret
+      # Enable the next line if you want to add a custom php.ini
+      #- ./php.ini:/usr/local/etc/php/conf.d/999-customphp.ini
 
   ssl:
     image: fballiano/nginx-ssl-for-magento2
@@ -52,6 +54,8 @@ services:
     volumes:
       - ./magento2:/var/www/html
       - ~/.composer/auth.json:/root/.composer/auth.json
+      # Enable the next line if you want to add a custom php.ini
+      #- ./php.ini:/usr/local/etc/php/conf.d/999-customphp.ini
 
   db:
     image: mariadb
