@@ -73,7 +73,7 @@ vagrant ssh
 cd on synced directory, and install:
 
 ```bash
-cd /vagrant
+cd /vagrant/magento2
 ./utility.sh install
 ```
 
