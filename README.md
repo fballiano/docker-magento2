@@ -79,6 +79,14 @@ cd /vagrant
 
 The fist time you run this command it's gonna take some time to download all the required images from docker hub.
 
+After install, change app/etc/env.php session handler with
+
+```bash
+array (
+    'save' => 'files',
+    'save_path' => '/tmp',
+  ),
+```
 
 That's all.
 
