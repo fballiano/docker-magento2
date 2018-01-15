@@ -43,6 +43,7 @@ if [ "$1" == "firstup" ] ; then
     docker-compose up -d ${@}
     print_style "Composer install\n" "info"
     docker-compose exec --user www-data apache composer install
+    docker-compose exec --user www-data apache /fix_permissions.sh
     print_style "Set production\n" "info"
     docker-compose exec --user www-data apache php bin/magento deploy:mode:set production
 elif [ "$1" == "install" ]; then
@@ -52,6 +53,7 @@ elif [ "$1" == "install" ]; then
     docker-compose exec --user www-data apache mv fb_host_probe.txt /tmp/fb_host_probe.txt
     docker-compose exec --user www-data apache composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition .
     docker-compose exec --user www-data apache mv /tmp/fb_host_probe.txt fb_host_probe.txt
+    docker-compose exec --user www-data apache /fix-permissions.sh
 elif [ "$1" == "up" ]; then
     print_style "Initializing Docker Compose\n" "info"
     shift # removing first argument

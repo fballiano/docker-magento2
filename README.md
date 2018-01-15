@@ -47,7 +47,7 @@ The fist time you run this command it's gonna take some time to download all the
 
 set your host file to 
 ```bash
-127.0.0.1 magento2.docker
+127.0.0.1 magento2.local
 ```
 
 
@@ -77,22 +77,33 @@ cd /vagrant
 ./utility.sh install
 ```
 
+
+
+
 The fist time you run this command it's gonna take some time to download all the required images from docker hub.
 
 After install, change app/etc/env.php session handler with
 
-```bash
+```php
 array (
     'save' => 'files',
     'save_path' => '/tmp',
-  ),
+),
 ```
+
+Everytime vagrant is started, you need to launch
+
+```bash
+./utility.sh firstup
+```
+
+To fix permissions
 
 That's all.
 
 set your host file to 
 ```bash
-10.0.0.10 magento2.docker
+10.0.0.10 magento2.local
 ```
 
 ### utility.sh guide
@@ -133,7 +144,7 @@ backup databases on ```./backup_db_magento2``` folder
 
 open your browser to the address:
 ```
-http://magento2.docker/
+http://magento2.local/
 ```
 and use the wizard to install Magento2.  
 For database configuration use hostname dockermagento2_db_1 and username/password/dbname you have in your docker-compose.xml file, defaults are:
