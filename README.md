@@ -1,5 +1,6 @@
 # Magento2 (Varnish + PHP7 + Redis + SSL) cluster ready docker-compose infrastructure
 
+
 ## Infrastructure overview
 * Container 1: MariaDB
 * Container 2: Redis (for Magento's cache)
@@ -8,25 +9,119 @@
 * Container 5: Varnish 4.1
 * Container 6: Redis (for autodiscovery cluster nodes)
 * Container 7: Nginx SSL terminator
+* Container 8: Cron container with db backup script at 1 AM
 
 ### Why a separate cron container?
 First of all containers should be (as far as possible) single process, but the most important thing is that (if someday we'll be able to deploy this infrastructure in production) we may need a cluster of apache+php containers but a single cron container running.
 
 Plus, with this separation, in the context of a docker swarm, you may be able in the future to separare resources allocated to the cron container from the rest of the infrastructure.
 
-## Setup Magento 2
-
-Download Magento 2 in any way you want (zip/tgz from website, composer, etc) and extract in the "magento2" subdirectory of this project.
-
-If you want to change the default "magento2" directory simply change its name in the "docker-compose.xml" (there are 2 references, under the "cron" section and under the "apache" section).
-
-## Starting all docker containers
-```
-docker-compose up -d
-```
-The fist time you run this command it's gonna take some time to download all the required images from docker hub.
 
 ## Install Magento2
+
+
+## Create auth.json
+
+Create auth.json on root, with
+
+```json
+{
+  "http-basic": {
+    "repo.magento.com": {
+      "username": "username",
+      "password": "password"
+    }
+  }
+}
+```
+
+
+
+## First Start on Linux
+
+```bash
+./utility.sh install
+```
+
+The fist time you run this command it's gonna take some time to download all the required images from docker hub.
+
+set your host file to 
+```bash
+127.0.0.1 magento2.docker
+```
+
+
+## First Start Mac OS
+
+Prerequisite
+
+* Virtualbox
+* Vagrant
+* Ansible with role geerlingguy.docker
+
+
+```bash
+vagrant up
+```
+
+ssh into vm
+
+```bash
+vagrant ssh
+```
+
+cd on synced directory, and install:
+
+```bash
+cd /vagrant
+./utility.sh install
+```
+
+The fist time you run this command it's gonna take some time to download all the required images from docker hub.
+
+
+That's all.
+
+set your host file to 
+```bash
+10.0.0.10 magento2.docker
+```
+
+### utility.sh guide
+
+Start all container
+
+```bash
+./utility.sh up
+```
+
+Bash on apache container
+
+```bash
+./utility.sh bash
+```
+
+delete all containers
+
+```bash
+./utility.sh down
+```
+
+stop all containers
+
+```bash
+./utility.sh down
+```
+
+backup databases on ```./backup_db_magento2``` folder
+
+```bash
+./utility.sh backup
+```
+
+
+
+
 
 open your browser to the address:
 ```
@@ -38,12 +133,6 @@ For database configuration use hostname dockermagento2_db_1 and username/passwor
 - MYSQL_PASSWORD=magento2
 - MYSQL_DATABASE=magento2
 
-## Deploy static files
-```
-docker exec -it dockermagento2_apache_1 bash
-php bin/magento dev:source-theme:deploy
-php bin/magento setup:static-content:deploy
-```
 
 ## Enable Redis for Magento's cache
 open magento2/app/etc/env.php and add these lines:

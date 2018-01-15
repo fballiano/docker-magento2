@@ -14,6 +14,7 @@ services:
     volumes:
       - ./magento2:/var/www/html
       - ./varnish.secret:/varnish.secret
+      - ./auth.json:/var/www/.composer/auth.json
       # Enable the next line if you want to add a custom php.ini
       #- ./php.ini:/usr/local/etc/php/conf.d/999-customphp.ini
 
@@ -53,7 +54,7 @@ services:
       - clusterdata
     volumes:
       - ./magento2:/var/www/html
-      - ~/.composer/auth.json:/root/.composer/auth.json
+      - ./auth.json:/var/www/.composer/auth.json
       # Enable the next line if you want to add a custom php.ini
       #- ./php.ini:/usr/local/etc/php/conf.d/999-customphp.ini
 
@@ -75,5 +76,12 @@ services:
   clusterdata:
     image: fballiano/redis-volatile
 
+  backup_db_magento2:
+    restart: always
+    image: nutellinoit/backup_db_magento2
+    volumes:
+          - ./backup_db_magento2/:/backup/
+          - ./script_backup_magento2.sh:/script.sh
+    
 volumes:
   dbdata:
