@@ -44,8 +44,12 @@ if [ "$1" == "firstup" ] ; then
     print_style "Composer install\n" "info"
     docker-compose exec --user www-data apache composer install
     docker-compose exec --user www-data apache /fix_permissions.sh
+elif [ "$1" == "production" ]; then
     print_style "Set production\n" "info"
     docker-compose exec --user www-data apache php bin/magento deploy:mode:set production
+elif [ "$1" == "developer" ]; then
+    print_style "Set developer\n" "info"
+    docker-compose exec --user www-data apache php bin/magento deploy:mode:set developer
 elif [ "$1" == "install" ]; then
     print_style "Initializing Docker Compose\n" "info"
     shift # removing first argument

@@ -82,7 +82,7 @@ cd /vagrant
 
 The fist time you run this command it's gonna take some time to download all the required images from docker hub.
 
-After install, change app/etc/env.php session handler with
+After install, if magento goes with session handler exception, change app/etc/env.php session handler with
 
 ```php
 array (
