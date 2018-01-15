@@ -55,7 +55,7 @@ services:
     volumes:
       - ./magento2:/var/www/html
       - ./auth.json:/var/www/.composer/auth.json
-      - ./fix_permissions.sh:/fix_permissions.sh
+      - ./fix_permissions.sh:/var/www/fix_permissions.sh
       # Enable the next line if you want to add a custom php.ini
       #- ./php.ini:/usr/local/etc/php/conf.d/999-customphp.ini
 

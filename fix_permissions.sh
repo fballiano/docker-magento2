@@ -18,6 +18,6 @@ chown -R www-data:www-data .
 echo 'Completed 80%'
 chmod u+x bin/magento
 echo 'Completed 90%'
-chmod u+x fix_permissions.sh
+#chmod u+x fix_permissions.sh
 chmod 777 .gitignore
 echo 'Completed 100%'
