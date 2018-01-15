@@ -49,7 +49,9 @@ elif [ "$1" == "install" ]; then
     print_style "Initializing Docker Compose\n" "info"
     shift # removing first argument
     docker-compose up -d ${@}
+    docker-compose exec --user www-data apache mv fb_host_probe.txt /tmp/fb_host_probe.txt
     docker-compose exec --user www-data apache composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition .
+    docker-compose exec --user www-data apache mv /tmp/fb_host_probe.txt fb_host_probe.txt
 elif [ "$1" == "up" ]; then
     print_style "Initializing Docker Compose\n" "info"
     shift # removing first argument
