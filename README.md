@@ -33,7 +33,7 @@ open your browser to the address:
 http://magento2.docker/
 ```
 and use the wizard to install Magento2.  
-For database configuration use hostname dockermagento2_db_1 and username/password/dbname you have in your docker-compose.xml file, defaults are:
+For database configuration use hostname db (or the name assigned to the DB container in your `docker-compose.yml` file), and username/password/dbname you have in your docker-compose.xml file, defaults are:
 - MYSQL_USER=magento2
 - MYSQL_PASSWORD=magento2
 - MYSQL_DATABASE=magento2
