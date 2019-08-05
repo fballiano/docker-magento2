@@ -3,9 +3,9 @@
 ## Infrastructure overview
 * Container 1: MariaDB
 * Container 2: Redis (for Magento's cache)
-* Container 3: Apache 2.4 + PHP 7 (modphp)
+* Container 3: Apache 2.4 + PHP 7.2 (modphp)
 * Container 4: Cron
-* Container 5: Varnish 4.1
+* Container 5: Varnish 5
 * Container 6: Redis (for autodiscovery cluster nodes)
 * Container 7: Nginx SSL terminator
 
