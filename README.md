@@ -144,6 +144,7 @@ Please note that your php.ini will be the last parsed thus you can ovverride any
 * optional RabbitMQ
 
 ## Changelog:
-* 2019-08-05: migrated to docker-compose syntax 3.7
-* 2019-08-05: implemented "delegated" consistency for some of volumes for a better performance
-* 2019-08-05: varnish.vcl was regenerated for Varnish 5 (which was already used since some months)
+* 2019-08-05:
+  * migrated to docker-compose syntax 3.7
+  * implemented "delegated" consistency for some of volumes for a better performance
+  * varnish.vcl was regenerated for Varnish 5 (which was already used since some months)
