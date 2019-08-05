@@ -134,11 +134,15 @@ We already have a personalized php.ini inside this project: https://github.com/f
 Please note that your php.ini will be the last parsed thus you can ovverride any setting.
 
 ## Tested on:
-* Docker for Mac 17
+* Docker for Mac 19
 
 ## TODO
-* migrate to alpine/linuxkit based containers
+* migrate to alpine/linuxkit based containers?
 * optimize everything for docker swarm
 * sessions on redis?
 * DB clustering?
 * optional RabbitMQ
+
+## Changelog:
+* 2019-08-05: migrated to docker-compose syntax 3.7
+* 2019-08-05: implemented "delegated" consistency for some of volumes for a better performance
