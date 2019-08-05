@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
   cron:
     image: fballiano/magento2-cron
@@ -12,8 +12,14 @@ services:
       - apache
       - varnish
     volumes:
-      - ./magento2:/var/www/html
-      - ./varnish.secret:/varnish.secret
+      - type: bind
+        source: ./magento2
+        target: /var/www/html
+        consistency: delegated
+      - type: bind
+        source: ./varnish.secret
+        target: /varnish.secret
+        consistency: consistent
       # Enable the next line if you want to add a custom php.ini
       #- ./php.ini:/usr/local/etc/php/conf.d/999-customphp.ini
 
@@ -52,7 +58,10 @@ services:
       - cache
       - clusterdata
     volumes:
-      - ./magento2:/var/www/html
+      - type: bind
+        source: ./magento2
+        target: /var/www/html
+        consistency: delegated
       - ~/.composer/auth.json:/root/.composer/auth.json
       # Enable the next line if you want to add a custom php.ini
       #- ./php.ini:/usr/local/etc/php/conf.d/999-customphp.ini
@@ -62,7 +71,10 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - dbdata:/var/lib/mysql
+      - type: volume
+        source: dbdata
+        target: /var/lib/mysql
+        consistency: delegated
     environment:
       - MYSQL_ROOT_PASSWORD=magento2
       - MYSQL_DATABASE=magento2
