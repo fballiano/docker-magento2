@@ -8,6 +8,7 @@ services:
     links:
       - db
       - cache
+      - sessions
       - clusterdata
       - apache
       - varnish
@@ -56,6 +57,7 @@ services:
     links:
       - db
       - cache
+      - sessions
       - clusterdata
     volumes:
       - type: bind
@@ -86,6 +88,9 @@ services:
 
   clusterdata:
     image: fballiano/redis-volatile
+
+  sessions:
+    image: redis
 
 volumes:
   dbdata:
