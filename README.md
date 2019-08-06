@@ -48,11 +48,11 @@ php bin/magento setup:static-content:deploy
 ## Enable Redis for Magento's cache
 open magento2/app/etc/env.php and add these lines:
 ```php
-'cache' => array(
-  'frontend' => array(
-    'default' => array(
+'cache' => [
+  'frontend' => [
+    'default' => [
       'backend' => 'Cm_Cache_Backend_Redis',
-      'backend_options' => array(
+      'backend_options' => [
         'server' => 'cache',
         'port' => '6379',
         'persistent' => '', // Specify a unique string like "cache-db0" to enable persistent connections.
@@ -67,11 +67,11 @@ open magento2/app/etc/env.php and add these lines:
         'compress_threshold' => '20480', // Strings below this size will not be compressed
         'compression_lib' => 'gzip', // Supports gzip, lzf and snappy,
         'use_lua' => '0' // Lua scripts should be used for some operations
-      )
-    ),
-    'page_cache' => array(
+      ]
+    ],
+    'page_cache' => [
       'backend' => 'Cm_Cache_Backend_Redis',
-      'backend_options' => array(
+      'backend_options' => [
         'server' => 'cache',
         'port' => '6379',
         'persistent' => '', // Specify a unique string like "cache-db0" to enable persistent connections.
@@ -81,10 +81,10 @@ open magento2/app/etc/env.php and add these lines:
         'connect_retries' => '1', // Reduces errors due to random connection failures
         'lifetimelimit' => '57600', // 16 hours of lifetime for cache record
         'compress_data' => '0' // DISABLE compression for EE FPC since it already uses compression
-      )
-    )
-  )
-),
+      ]
+    ]
+  ]
+],
 ```
 and delete all Magento's cache with
 ```
