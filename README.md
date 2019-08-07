@@ -184,9 +184,9 @@ Please note that your php.ini will be the last parsed thus you can ovverride any
 let me know what features would you like to see implemented.
 
 ## Changelog:
+* 2019-08-06:
+  * new redis sessions container was added
 * 2019-08-05:
   * migrated to docker-compose syntax 3.7
   * implemented "delegated" consistency for some of volumes for a better performance
   * varnish.vcl was regenerated for Varnish 5 (which was already used since some months)
-* 2019-08-06:
-  * new redis sessions container was added
