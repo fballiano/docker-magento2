@@ -184,6 +184,8 @@ Please note that your php.ini will be the last parsed thus you can ovverride any
 let me know what features would you like to see implemented.
 
 ## Changelog:
+* 2019-08-09:
+  * small bugfix in varnishadm.sh and varnishncsa.sh scripts
 * 2019-08-06:
   * new redis sessions container was added
 * 2019-08-05:
