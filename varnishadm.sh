@@ -1,2 +1,2 @@
 #!/bin/sh
-docker exec -it dockermagento2_varnish_1 varnishadm
+docker exec -it docker-magento2_varnish_1 varnishadm
