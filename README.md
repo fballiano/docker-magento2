@@ -178,7 +178,6 @@ Please note that your php.ini will be the last parsed thus you can ovverride any
 * Docker for Mac 19
 
 ## TODO
-* migrate to alpine/linuxkit based containers?
 * DB clustering?
 * RabbitMQ?
 let me know what features would you like to see implemented.
