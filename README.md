@@ -140,6 +140,18 @@ Varnish Full Page Cache should already be enabled out of the box (we startup Var
 * type 80 in the "backend port" field
 * save
 
+Configure Magento to purge Varnish: add on app/etc/env.php
+
+```
+    'http_cache_hosts' => [
+        [
+            'host' => 'varnish'
+        ]
+    ],
+```
+
+https://devdocs.magento.com/guides/v2.3/config-guide/varnish/use-varnish-cache.html
+
 ## Enable SSL Support
 Add this line to magento2/.htaccess
 ```
