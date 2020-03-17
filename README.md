@@ -29,7 +29,16 @@ The fist time you run this command it's gonna take some time to download all the
 
 ## Install Magento2
 
-open your browser to the address:
+### Method 1: CLI
+```
+docker exec -it docker-magento2_apache_1 bash
+php bin/magento setup:install --backend-frontname admin --db-host docker-magento2_db_1 --db-name magento2 --db-user magento2 --db-password magento2  --admin-user admin --timezone 'Europe/Rome' --currency EUR --use-rewrites 1 --cleanup-database  --admin-firstname AdminFirstName --admin-lastname AdminLastName --admin-email 'admin@email.com' --admin-password 'admin@email.com' --base-url 'https://magento2.docker/' --language en_US;
+
+```
+
+### Method 2: Web installer
+
+If you want to install Magento via web installer (not the best option, it will probably timeout) open your browser to the address:
 ```
 https://magento2.docker/
 ```
