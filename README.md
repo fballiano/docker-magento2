@@ -31,7 +31,7 @@ The fist time you run this command it's gonna take some time to download all the
 
 open your browser to the address:
 ```
-http://magento2.docker/
+https://magento2.docker/
 ```
 and use the wizard to install Magento2.  
 For database configuration use hostname db (or the name assigned to the DB container in your `docker-compose.yml` file, default is docker-magento2_db_1), and username/password/dbname you have in your docker-compose.xml file, defaults are:
