@@ -60,7 +60,7 @@ php bin/magento setup:static-content:deploy
 ```
 
 ## Enable Redis for Magento's cache
-open magento2/app/etc/env.php and add these lines:
+If you installed Magento via CLI then Redis is already configured, otherwise open magento2/app/etc/env.php and add these lines:
 ```php
 'cache' => [
   'frontend' => [
@@ -107,7 +107,7 @@ rm -rf magento2/var/cache/*
 from now on the var/cache directory should stay empty cause all the caches should be stored in Redis.
 
 ## Enable Redis for Magento's sessions
-open magento2/app/etc/env.php and replace these lines:
+If you installed Magento via CLI then Redis is already configured, otherwise open magento2/app/etc/env.php and replace these lines:
 ```php
 'session' => [
   'save' => 'files',
