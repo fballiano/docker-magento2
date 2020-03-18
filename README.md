@@ -34,7 +34,7 @@ The fist time you run this command it's gonna take some time to download all the
 docker exec -it docker-magento2_apache_1 bash
 php bin/magento setup:install \
   --db-host docker-magento2_db_1 --db-name magento2 --db-user magento2 --db-password magento2  --admin-user admin --timezone 'Europe/Rome' --currency EUR --use-rewrites 1 --cleanup-database \
-  --backend-frontname admin --admin-firstname AdminFirstName --admin-lastname AdminLastName --admin-email 'admin@email.com' --admin-password 'ChangeThisPassword' --base-url 'https://magento2.docker/' --language en_US \
+  --backend-frontname admin --admin-firstname AdminFirstName --admin-lastname AdminLastName --admin-email 'admin@email.com' --admin-password 'ChangeThisPassword1' --base-url 'https://magento2.docker/' --language en_US \
   --session-save=redis --session-save-redis-host=sessions --session-save-redis-port=6379 --session-save-redis-db=0 --session-save-redis-password='' \
   --cache-backend=redis --cache-backend-redis-server=cache --cache-backend-redis-port=6379 --cache-backend-redis-db=0 \
   --page-cache=redis --page-cache-redis-server=cache --page-cache-redis-port=6379 --page-cache-redis-db=1
