@@ -205,6 +205,11 @@ Please note that your php.ini will be the last parsed thus you can ovverride any
 let me know what features would you like to see implemented.
 
 ## Changelog:
+* 2020-03-18:
+  * added "sockets" PHP extension to docker-apache-php image
+  * fixed some typos/mistakes in the README
+  * added CLI install to the README
+  * refactored some parts of the documentation to better use magento's CLI
 * 2019-08-09:
   * small bugfix in varnishadm.sh and varnishncsa.sh scripts
 * 2019-08-06:
