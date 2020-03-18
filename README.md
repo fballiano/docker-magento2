@@ -153,14 +153,11 @@ Varnish Full Page Cache should already be enabled out of the box (we startup Var
 * type 80 in the "backend port" field
 * save
 
-Configure Magento to purge Varnish: add on app/etc/env.php
+Configure Magento to purge Varnish:
 
 ```
-    'http_cache_hosts' => [
-        [
-            'host' => 'varnish'
-        ]
-    ],
+docker exec -it docker-magento2_apache_1 bash
+php bin/magento setup:config:set --http-cache-hosts=varnish
 ```
 
 https://devdocs.magento.com/guides/v2.3/config-guide/varnish/use-varnish-cache.html
