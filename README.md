@@ -19,7 +19,7 @@ Plus, with this separation, in the context of a docker swarm, you may be able in
 
 Download Magento 2 in any way you want (zip/tgz from website, composer, etc) and extract in the "magento2" subdirectory of this project.
 
-If you want to change the default "magento2" directory simply change its name in the "docker-compose.xml" (there are 2 references, under the "cron" section and under the "apache" section).
+If you want to change the default "magento2" directory simply change its name in the "docker-compose.yml" (there are 2 references, under the "cron" section and under the "apache" section).
 
 ## Starting all docker containers
 ```
