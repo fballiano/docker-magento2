@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   cron:
-    image: fballiano/magento2-cron
+    image: fballiano/magento2-cron:M2.4
     depends_on:
       - apache
       - varnish
@@ -12,6 +12,7 @@ services:
       - clusterdata
       - apache
       - varnish
+      - elasticsearch
     volumes:
       - type: bind
         source: ./magento2
@@ -34,7 +35,7 @@ services:
       - "443:443"
 
   varnish:
-    image: fballiano/varnish
+    image: fballiano/varnish:M2.4
     ports:
       - "80:80"
       - "6082:6082"
@@ -49,7 +50,7 @@ services:
       - CACHE_SIZE=256M
 
   apache:
-    image: fballiano/magento2-apache-php
+    image: fballiano/magento2-apache-php:M2.4
     depends_on:
       - db
       - cache
@@ -69,7 +70,7 @@ services:
       #- ./php.ini:/usr/local/etc/php/conf.d/999-customphp.ini
 
   db:
-    image: mariadb
+    image: mysql:8.0
     ports:
       - "3306:3306"
     volumes:
@@ -83,14 +84,29 @@ services:
       - MYSQL_USER=magento2
       - MYSQL_PASSWORD=magento2
 
+  elasticsearch:
+    image: elasticsearch:7.6.2
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 2g
+    ports:
+      - "9300:9300"
+      - "9200:9200"
+
   cache:
-    image: fballiano/redis-volatile
+    image: fballiano/redis-volatile:M2.4
 
   clusterdata:
-    image: fballiano/redis-volatile
+    image: fballiano/redis-volatile:M2.4
 
   sessions:
-    image: redis
+    image: redis:5
 
 volumes:
   dbdata:

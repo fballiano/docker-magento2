@@ -4,11 +4,12 @@
 * Container 1: MariaDB
 * Container 2: Redis (volatile, for Magento's cache)
 * Container 3: Redis (for Magento's sessions)
-* Container 4: Apache 2.4 + PHP 7.2 (modphp)
+* Container 4: Apache 2.4 + PHP 7.4 (modphp)
 * Container 5: Cron
-* Container 6: Varnish 5
+* Container 6: Varnish 6
 * Container 7: Redis (volatile, cluster nodes autodiscovery)
 * Container 8: Nginx SSL terminator
+* Container 9: Elasticsearch 7.6
 
 ### Why a separate cron container?
 First of all containers should be (as far as possible) single process, but the most important thing is that (if someday we'll be able to deploy this infrastructure in production) we may need a cluster of apache+php containers but a single cron container running.
@@ -38,6 +39,7 @@ php bin/magento setup:install \
   --session-save=redis --session-save-redis-host=sessions --session-save-redis-port=6379 --session-save-redis-db=0 --session-save-redis-password='' \
   --cache-backend=redis --cache-backend-redis-server=cache --cache-backend-redis-port=6379 --cache-backend-redis-db=0 \
   --page-cache=redis --page-cache-redis-server=cache --page-cache-redis-port=6379 --page-cache-redis-db=1
+  --search-engine=elasticsearch7 --elasticsearch-host=elastic
 ```
 
 ### Method 2: Web installer
@@ -205,6 +207,10 @@ Please note that your php.ini will be the last parsed thus you can ovverride any
 let me know what features would you like to see implemented.
 
 ## Changelog:
+* 2020-09-19:
+  * Magento 2.4 branch added
+  * Elasticsearch container added for Magento 2.4
+  * Upaded all dependencies
 * 2020-03-18:
   * added "sockets" PHP extension to docker-apache-php image
   * fixed some typos/mistakes in the README
