@@ -1,4 +1,4 @@
-# Docker Magento2: Varnish + PHP7 + Redis + SSL cluster ready docker-compose infrastructure
+# Docker Magento2: Varnish 6 + PHP7.4 + Redis + Elasticsearch 7.6 + SSL cluster ready docker-compose infrastructure
 
 ## Infrastructure overview
 * Container 1: MariaDB
