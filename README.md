@@ -1,15 +1,15 @@
-# Docker Magento2: Varnish 6 + PHP7.4 + Redis + Elasticsearch 7.6 + SSL cluster ready docker-compose infrastructure
+# Docker Magento2: Varnish 7 + PHP 8.1 + Redis 6.2 + Elasticsearch 7.17 + SSL cluster ready docker-compose infrastructure
 
 ## Infrastructure overview
 * Container 1: MariaDB
-* Container 2: Redis (volatile, for Magento's cache)
-* Container 3: Redis (for Magento's sessions)
-* Container 4: Apache 2.4 + PHP 7.4 (modphp)
+* Container 2: Redis 6.2 (volatile, for Magento's cache)
+* Container 3: Redis 6.2 (for Magento's sessions)
+* Container 4: Apache 2.4 + PHP 8.1 (modphp)
 * Container 5: Cron
-* Container 6: Varnish 6
+* Container 6: Varnish 7
 * Container 7: Redis (volatile, cluster nodes autodiscovery)
 * Container 8: Nginx SSL terminator
-* Container 9: Elasticsearch 7.6
+* Container 9: Elasticsearch 7.17
 
 ### Why a separate cron container?
 First of all containers should be (as far as possible) single process, but the most important thing is that (if someday we'll be able to deploy this infrastructure in production) we may need a cluster of apache+php containers but a single cron container running.
@@ -41,18 +41,6 @@ php bin/magento setup:install \
   --page-cache=redis --page-cache-redis-server=cache --page-cache-redis-port=6379 --page-cache-redis-db=1 \
   --search-engine=elasticsearch7 --elasticsearch-host=elasticsearch
 ```
-
-### Method 2: Web installer
-
-If you want to install Magento via web installer (not the best option, it will probably timeout) open your browser to the address:
-```
-https://magento2.docker/
-```
-and use the wizard to install Magento2.  
-For database configuration use hostname db (or the name assigned to the DB container in your `docker-compose.yml` file, default is docker-magento2_db_1), and username/password/dbname you have in your docker-compose.xml file, defaults are:
-- MYSQL_USER=magento2
-- MYSQL_PASSWORD=magento2
-- MYSQL_DATABASE=magento2
 
 ## Deploy static files
 ```
