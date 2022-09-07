@@ -35,7 +35,7 @@ services:
       - "443:443"
 
   varnish:
-    image: varnish:6.0
+    image: varnish:7.0
     ports:
       - "80:80"
       - "6082:6082"
