@@ -6,7 +6,7 @@
 * Container 3: Redis 6.2 (for Magento's sessions)
 * Container 4: Apache 2.4 + PHP 8.1 (modphp)
 * Container 5: Cron
-* Container 6: Varnish 7
+* Container 6: Varnish 6
 * Container 7: Redis (volatile, cluster nodes autodiscovery)
 * Container 8: Nginx SSL terminator
 * Container 9: Elasticsearch 7.17

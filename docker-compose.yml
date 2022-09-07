@@ -35,7 +35,7 @@ services:
       - "443:443"
 
   varnish:
-    image: fballiano/varnish:M2.4.5
+    image: varnish:6.0
     ports:
       - "80:80"
       - "6082:6082"
