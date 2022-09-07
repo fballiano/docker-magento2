@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 services:
   cron:
     image: fballiano/magento2-cron:M2.4
@@ -85,7 +85,7 @@ services:
       - MYSQL_PASSWORD=magento2
 
   elasticsearch:
-    image: elasticsearch:7.17
+    image: elasticsearch:7.17.6
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
