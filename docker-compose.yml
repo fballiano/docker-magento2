@@ -35,7 +35,7 @@ services:
       - "443:443"
 
   varnish:
-    image: fballiano/varnish:M2.4
+    image: fballiano/varnish:M2.4.5
     ports:
       - "80:80"
       - "6082:6082"
@@ -50,7 +50,7 @@ services:
       - CACHE_SIZE=256M
 
   apache:
-    image: fballiano/magento2-apache-php:M2.4
+    image: fballiano/magento2-apache-php:M2.4.5
     depends_on:
       - db
       - cache
@@ -85,7 +85,7 @@ services:
       - MYSQL_PASSWORD=magento2
 
   elasticsearch:
-    image: elasticsearch:7.6.2
+    image: elasticsearch:7.17
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
@@ -100,13 +100,13 @@ services:
       - "9200:9200"
 
   cache:
-    image: fballiano/redis-volatile:M2.4
+    image: fballiano/redis-volatile:M2.4.5
 
   clusterdata:
-    image: fballiano/redis-volatile:M2.4
+    image: fballiano/redis-volatile:M2.4.5
 
   sessions:
-    image: redis:5
+    image: redis:6.2
 
 volumes:
   dbdata:
