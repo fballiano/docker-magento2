@@ -1,12 +1,12 @@
 # Docker Magento2: Varnish 7 + PHP 8.1 + Redis 6.2 + Elasticsearch 7.17 + SSL cluster ready docker-compose infrastructure
 
 ## Infrastructure overview
-* Container 1: MariaDB
-* Container 2: Redis 6.2 (volatile, for Magento's cache)
-* Container 3: Redis 6.2 (for Magento's sessions)
-* Container 4: Apache 2.4 + PHP 8.1 (modphp)
+* Container 1: Mysql 8.0
+* Container 2: Redis 7.0 (volatile, for Magento's cache)
+* Container 3: Redis 7.0 (for Magento's sessions)
+* Container 4: Apache 2.4 + PHP 8.2 (modphp)
 * Container 5: Cron
-* Container 6: Varnish 7
+* Container 6: Varnish 7.1
 * Container 7: Redis (volatile, cluster nodes autodiscovery)
 * Container 8: Nginx SSL terminator
 * Container 9: Elasticsearch 7.17
