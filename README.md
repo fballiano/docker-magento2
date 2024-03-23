@@ -1,4 +1,4 @@
-# Docker Magento2: Varnish 7 + PHP 8.1 + Redis 6.2 + Elasticsearch 7.17 + SSL cluster ready docker-compose infrastructure
+# Docker Magento2: Varnish 7 + PHP 8.2 + Redis 6.2 + Elasticsearch 7.17 + SSL cluster ready docker-compose infrastructure
 
 <table><tr><td align=center>
 <strong>If you find my work valuable, please consider sponsoring</strong><br />
